@@ -77,6 +77,8 @@ jobs:
             sudo systemctl start docker
             sudo systemctl enable docker.service
             sudo systemctl enable containerd.service
+            docker rm postgresql 
+            docker rm postgresql -f
             docker run --name postgresql -d -p 5432:5432 -e POSTGRES_PASSWORD=root postgres
             docker exec -it postgresql psql -Upostgres -w
             CREATE DATABASE springdocker;
