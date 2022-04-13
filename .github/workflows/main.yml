@@ -73,4 +73,4 @@ jobs:
             docker stop springboot-postgres
             docker rmi hendrojun/springboot-postgres:latest
             docker pull hendrojun/springboot-postgres:latest
-            docker run -d --rm --name springboot-postgres -p 80:8080 -p 443:8080 --env-file=.dev.env --network alterra hendrojun/springboot-postgres:latest
+            docker run --name springboot-postgres -p 80:8080 -p 443:8080 --env-file=.dev.env --network alterra -d hendrojun/springboot-postgres:latest
