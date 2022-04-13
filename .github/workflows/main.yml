@@ -70,14 +70,21 @@ jobs:
           username: ${{ secrets.EC2_SSH_USERNAME }}
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
-            sudo update
+            sudo yum update
             sudo groupadd docker
             sudo usermod -aG docker $USER
             sudo yum install docker
             sudo docker start
             sudo systemctl enable docker.service
             sudo systemctl enable containerd.service
+            docker run --name postgresql -d -p 5432:5432 -e POSTGRES_PASSWORD=root postgres
+            docker exec -it postgresql psql -Upostgres -w
+            CREATE DATABASE springdocker;
+            exit
+            exit
+            docker network create alterra
+            docker network connect alterra postgresql
             docker stop springboot-postgres
             docker rmi hendrojun/springboot-postgres:latest
             docker pull hendrojun/springboot-postgres:latest
-            docker run -d --rm --name springboot-postgres -p 80:8080 -p 443:8080 --env-file=.dev.env --network kampus_merdeka hendrojun/springboot-postgres:latest
+            docker run -d --rm --name springboot-postgres -p 80:8080 -p 443:8080 --env-file=.dev.env --network alterra hendrojun/springboot-postgres:latest
