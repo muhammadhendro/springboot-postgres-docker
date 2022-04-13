@@ -74,13 +74,12 @@ jobs:
             sudo groupadd docker
             sudo usermod -aG docker $USER
             sudo yum install docker
-            sudo docker start
+            sudo systemctl start docker
             sudo systemctl enable docker.service
             sudo systemctl enable containerd.service
             docker run --name postgresql -d -p 5432:5432 -e POSTGRES_PASSWORD=root postgres
             docker exec -it postgresql psql -Upostgres -w
             CREATE DATABASE springdocker;
-            exit
             exit
             docker network create alterra
             docker network connect alterra postgresql
