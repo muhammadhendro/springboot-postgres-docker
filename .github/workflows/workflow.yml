@@ -1,10 +1,11 @@
 name: Spring Boot Postgres Pipeline
 
 on:
-  workflow dispatch:
+
   push:
     branches:
       - main
+  workflow dispatch:
 
 jobs:
   run_test:
