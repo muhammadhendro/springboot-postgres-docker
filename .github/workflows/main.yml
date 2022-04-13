@@ -70,6 +70,13 @@ jobs:
           username: ${{ secrets.EC2_SSH_USERNAME }}
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
+            sudo update
+            sudo groupadd docker
+            sudo usermod -aG docker $USER
+            sudo yum install docker
+            sudo docker start
+            sudo systemctl enable docker.service
+            sudo systemctl enable containerd.service
             docker stop springboot-postgres
             docker rmi hendrojun/springboot-postgres:latest
             docker pull hendrojun/springboot-postgres:latest
