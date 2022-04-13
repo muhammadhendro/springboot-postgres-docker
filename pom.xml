@@ -14,7 +14,7 @@
 	<name>alterra</name>
 	<description>Demo project for Spring Boot section 25 </description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>14</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
